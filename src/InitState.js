@@ -87,7 +87,6 @@ class InitState extends StateEngine {
         this.setMatrixUniforms();
 
 
-
         gl.drawElements(gl.TRIANGLES, this.background.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 
         camera.mvPopMatrix();
@@ -139,9 +138,6 @@ class InitState extends StateEngine {
         mat3.transpose(normalMatrix);
         gl.uniformMatrix3fv(shaderProgram.uNMatrix, false, normalMatrix);
     }
-
-
-
 
 
 }

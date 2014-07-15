@@ -11,7 +11,7 @@ class Medic extends Character {
         this.angle = 90;
         this.lt = 0;
         this.speed = 0;
-        this.acceleration =5;
+        this.acceleration = 5;
 
 
         this.model = new Model('ship');

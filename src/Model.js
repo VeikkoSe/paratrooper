@@ -26,7 +26,6 @@ class Model {
         this.loadMesh();
 
 
-
         var t = new Texture(this.name);
 
         this.texture = t.loadedTexture;

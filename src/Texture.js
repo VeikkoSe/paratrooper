@@ -8,7 +8,6 @@ class Texture {
         this.loadedTexture = null;
         this.loaded = 0;
         this.initTexture(this.name);
-
     }
 
     handleLoadedTexture() {

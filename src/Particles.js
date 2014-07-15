@@ -7,7 +7,6 @@ class Particles {
         var t = new Texture('smoke');
         this.asteroidTexture = t.loadedTexture;
 
-
     }
 
     newAsteroidExplosion(y, x) {

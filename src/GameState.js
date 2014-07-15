@@ -32,7 +32,6 @@ class GameState extends StateEngine {
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
 
-
     }
 
 
@@ -44,6 +43,7 @@ class GameState extends StateEngine {
 
         return  y / screenHeight;
     }
+
     animate() {
         var timeNow = new Date().getTime();
         this.frameCount++;
@@ -68,8 +68,6 @@ class GameState extends StateEngine {
     degToRad(degrees) {
         return degrees * Math.PI / 180;
     }
-
-
 
 
     drawMedic() {
@@ -155,10 +153,7 @@ class GameState extends StateEngine {
     drawScene() {
 
 
-
-
         gl.useProgram(shaderProgram);
-
 
 
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -182,9 +177,6 @@ class GameState extends StateEngine {
         gl.uniform1f(shaderProgram.uMaterialShininess, 200.0);
 
 
-
-
-
         //gl.useProgram(shaderProgram);
 
         //mat4.inverse(mvMatrix,cMatrix);     //Obtain Camera Matrix from Model-View Matrix
@@ -204,7 +196,7 @@ class GameState extends StateEngine {
         this.drawMedic();
         //gl.useProgram(particleProgram);
 
-       //gl.enable(gl.BLEND);
+        //gl.enable(gl.BLEND);
         //gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
         //this.drawAsteroidExplosion();
 
@@ -212,18 +204,13 @@ class GameState extends StateEngine {
         //gl.disable(gl.BLEND);
 
 
-
-
         //camera.move();
 
     }
 
 
-
-
-
     setMatrixUniforms() {
-        mat4.inverse(camera.mvMatrix,camera.cMatrix);
+        mat4.inverse(camera.mvMatrix, camera.cMatrix);
         gl.uniformMatrix4fv(shaderProgram.uPMatrix, false, camera.pMatrix);
         gl.uniformMatrix4fv(shaderProgram.uMVMatrix, false, camera.mvMatrix);
 
@@ -232,10 +219,6 @@ class GameState extends StateEngine {
         mat3.transpose(normalMatrix);
         gl.uniformMatrix3fv(shaderProgram.uNMatrix, false, normalMatrix);
     }
-
-
-
-
 
 
 }

@@ -2,7 +2,6 @@ class Character {
     constructor() {
 
 
-
     }
 
     rotateLeft(elapsed) {
@@ -12,7 +11,7 @@ class Character {
         if (this.angle < 0)
             this.angle = 360;
 
-        this.angle += 600  * ( elapsed / 1000.0 );
+        this.angle += 600 * ( elapsed / 1000.0 );
     }
 
     rotateRight(elapsed) {
@@ -22,18 +21,14 @@ class Character {
 
         if (this.angle < 0)
             this.angle = 360;
-        this.angle -= 600  * ( elapsed / 1000.0 );
+        this.angle -= 600 * ( elapsed / 1000.0 );
 
     }
 
     setAccelerationOn(elapsed) {
 
 
-
-
-
         //this.newEngineSmoke();
-
 
     }
 
@@ -41,10 +36,10 @@ class Character {
     move(elapsed) {
 
         var deltaY = this.newYpos - this.yPos;
-        var deltaX = this.newXpos -  this.xPos;
+        var deltaX = this.newXpos - this.xPos;
 
 
-        var angleInDegrees = Math.atan2(deltaY,deltaX) * 180 / Math.PI;
+        var angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 
         printMessage(deltaX);
         var dirVectorX = Math.cos(this.degToRad(angleInDegrees));
@@ -88,12 +83,7 @@ class Character {
     }
 
 
-
-
-
-
-
-
-}/**
+}
+/**
  * Created by Vge on 13.7.2014.
  */

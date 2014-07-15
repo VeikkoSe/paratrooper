@@ -16,11 +16,7 @@ class Game {
         this.tick();
 
 
-
-
-
     }
-
 
 
     tick() {

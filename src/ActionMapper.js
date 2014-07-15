@@ -39,6 +39,7 @@ class ActionMapper {
         }
         else // Firefox method to get the position
         {
+
             x = e.clientX + document.body.scrollLeft +
                 document.documentElement.scrollLeft;
             y = e.clientY + document.body.scrollTop +

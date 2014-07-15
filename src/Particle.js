@@ -10,7 +10,6 @@ class Particle {
         this.yPos = 0;
         this.buildBuffers();
 
-
     }
 
     buildBuffers() {

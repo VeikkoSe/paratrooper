@@ -3,6 +3,4 @@ class PauseState extends StateEngine {
         //super();
     }
 
-
-
 }

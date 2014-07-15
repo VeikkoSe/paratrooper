@@ -37,7 +37,9 @@ class Gun {
     }
 
 
+
     moveAmmo() {
+
 
         var timeNow = new Date().getTime();
 

@@ -20,6 +20,7 @@ class StateEngine {
 
     init() {
     }
+
     animate() {
     }
 

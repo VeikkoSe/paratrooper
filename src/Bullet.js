@@ -9,5 +9,6 @@ class Bullet {
         this.speed = 150;
         this.deathtime = 1500;
 
+
     }
 }

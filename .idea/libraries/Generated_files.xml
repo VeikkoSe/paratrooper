@@ -2,57 +2,55 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/out/src/Camlera.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Bullet.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Camera.js" />
-        <item url="file://$PROJECT_DIR$/out/src/EndState.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Game.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Characters.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Character.js" />
         <item url="file://$PROJECT_DIR$/out/src/ActionMapper.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Infiltrator.js" />
-        <item url="file://$PROJECT_DIR$/out/src/InitState.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Ranger.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Gunner.js" />
-        <item url="file://$PROJECT_DIR$/out/src/StateEngine.js" />
-        <item url="file://$PROJECT_DIR$/out/src/PlanningState.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Waypoint.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Texture.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Particle.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Model.js" />
         <item url="file://$PROJECT_DIR$/out/src/PauseState.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Bullet.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Model.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Camera.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Character.js" />
+        <item url="file://$PROJECT_DIR$/out/src/EndState.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Texture.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Game.js" />
         <item url="file://$PROJECT_DIR$/out/src/Particles.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Gun.js" />
-        <item url="file://$PROJECT_DIR$/out/src/GameState.js" />
-        <item url="file://$PROJECT_DIR$/out/src/Medic.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Particle.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Gunner.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Infiltrator.js" />
+        <item url="file://$PROJECT_DIR$/out/src/StateEngine.js" />
         <item url="file://$PROJECT_DIR$/out/src/InitState.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Medic.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Gun.js" />
+        <item url="file://$PROJECT_DIR$/out/src/Ranger.js" />
+        <item url="file://$PROJECT_DIR$/out/src/GameState.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/out/src/Camlera.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Camera.js" />
       <root url="file://$PROJECT_DIR$/out/src/Characters.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Character.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Infiltrator.js" />
-      <root url="file://$PROJECT_DIR$/out/src/InitState.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Ranger.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Bullet.js" />
-      <root url="file://$PROJECT_DIR$/out/src/EndState.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Game.js" />
-      <root url="file://$PROJECT_DIR$/out/src/ActionMapper.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Gunner.js" />
-      <root url="file://$PROJECT_DIR$/out/src/StateEngine.js" />
       <root url="file://$PROJECT_DIR$/out/src/PlanningState.js" />
       <root url="file://$PROJECT_DIR$/out/src/Waypoint.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Texture.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Particle.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Model.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Camlera.js" />
+      <root url="file://$PROJECT_DIR$/out/src/PlanningState.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Characters.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Waypoint.js" />
       <root url="file://$PROJECT_DIR$/out/src/PauseState.js" />
+      <root url="file://$PROJECT_DIR$/out/src/ActionMapper.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Model.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Bullet.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Camera.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Character.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Texture.js" />
+      <root url="file://$PROJECT_DIR$/out/src/EndState.js" />
       <root url="file://$PROJECT_DIR$/out/src/Particles.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Gun.js" />
-      <root url="file://$PROJECT_DIR$/out/src/GameState.js" />
-      <root url="file://$PROJECT_DIR$/out/src/Medic.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Game.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Gunner.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Particle.js" />
+      <root url="file://$PROJECT_DIR$/out/src/StateEngine.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Infiltrator.js" />
       <root url="file://$PROJECT_DIR$/out/src/InitState.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Medic.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Gun.js" />
+      <root url="file://$PROJECT_DIR$/out/src/Ranger.js" />
+      <root url="file://$PROJECT_DIR$/out/src/GameState.js" />
     </CLASSES>
     <SOURCES />
   </library>

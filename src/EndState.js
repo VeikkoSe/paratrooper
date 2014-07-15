@@ -37,7 +37,7 @@ class EndState extends StateEngine {
 
         document.onkeydown = this.handleKeyDown;
         document.onkeyup = this.handleKeyUp;
-        printMessage("<h1>You destroyed "+game.shotAsteroids +" asteroids</h1>")
+        printMessage("<h1>You destroyed " + game.shotAsteroids + " asteroids</h1>")
 
     }
 

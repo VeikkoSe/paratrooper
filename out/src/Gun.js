@@ -39,8 +39,8 @@ var Gun = function Gun() {
       for (var i = 0; i < this.bulletsAmount; i++) {
         if (timeNow - this.bullets[$traceurRuntime.toProperty(i)].deathtime > this.bullets[$traceurRuntime.toProperty(i)].birthTime)
           this.bullets[$traceurRuntime.toProperty(i)].visible = 0;
-        var posX = this.bullets[$traceurRuntime.toProperty(i)].speed * (elapsed / 1000.0) * Math.cos(this.degToRad(this.bullets[$traceurRuntime.toProperty(i)].angle));
-        var posY = this.bullets[$traceurRuntime.toProperty(i)].speed * (elapsed / 1000.0) * Math.sin(this.degToRad(this.bullets[$traceurRuntime.toProperty(i)].angle));
+        var posX = this.bullets[$traceurRuntime.toProperty(i)].speed * (elapsed / 1000.0) * Math.cos(helpers.degToRad(this.bullets[$traceurRuntime.toProperty(i)].angle));
+        var posY = this.bullets[$traceurRuntime.toProperty(i)].speed * (elapsed / 1000.0) * Math.sin(helpers.degToRad(this.bullets[$traceurRuntime.toProperty(i)].angle));
         this.bullets[$traceurRuntime.toProperty(i)].xPos += posX;
         this.bullets[$traceurRuntime.toProperty(i)].yPos += posY;
         if (this.bullets[$traceurRuntime.toProperty(i)].xPos > screenWidth) {
@@ -58,10 +58,6 @@ var Gun = function Gun() {
       }
     }
     this.lastTime = timeNow;
-  },
-  degToRad: function(degrees) {
-    "use strict";
-    return degrees * Math.PI / 180;
   },
   checkHit: function() {
     "use strict";

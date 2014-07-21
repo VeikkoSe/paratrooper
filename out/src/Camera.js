@@ -3,15 +3,18 @@ var Camera = function Camera() {
   this.mvMatrix = mat4.create();
   this.pMatrix = mat4.create();
   this.cMatrix = mat4.create();
+  this.pvMatrix = mat4.create();
+  this.pvMatrixInverse = mat4.create();
   this.mvMatrixStack = [];
+  this.eye = vec3.create([0, 0, 0]);
   this.x = 0;
-  this.y = -30;
-  this.z = -10;
+  this.y = -68;
+  this.z = -47;
   this.slideLeft = false;
   this.slideRight = false;
   this.slideUp = false;
   this.slideDown = false;
-  this.rotation = 70;
+  this.rotation = 45;
   this.home = [this.x, this.y, this.z];
   mat4.identity(this.mvMatrix);
   mat4.translate(this.mvMatrix, this.home);
@@ -51,9 +54,16 @@ var Camera = function Camera() {
       this.slideCameraUp(0.3);
     if (this.slideDown)
       this.slideCameraDown(0.3);
+    if ($('#controlCamera').prop('checked')) {
+      this.x = $('#cslider-x').slider("value");
+      this.y = $('#cslider-y').slider("value");
+      this.z = $('#cslider-z').slider("value");
+      this.rotation = $('#rslider-x').slider("value");
+    }
     mat4.identity(this.mvMatrix);
     mat4.rotate(this.mvMatrix, this.rotation, [1, 0, 0]);
     mat4.translate(this.mvMatrix, [this.x, this.y, this.z]);
+    mat4.multiply(this.pMatrix, this.mvMatrix, this.pvMatrix);
   },
   mvPushMatrix: function() {
     "use strict";
@@ -67,9 +77,5 @@ var Camera = function Camera() {
       throw "Invalid popMatrix!";
     }
     this.mvMatrix = this.mvMatrixStack.pop();
-  },
-  degToRad: function(degrees) {
-    "use strict";
-    return degrees * Math.PI / 180;
   }
 }, {});

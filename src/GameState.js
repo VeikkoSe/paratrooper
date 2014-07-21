@@ -65,9 +65,7 @@ class GameState extends StateEngine {
     }
 
 
-    degToRad(degrees) {
-        return degrees * Math.PI / 180;
-    }
+
 
 
     drawMedic() {
@@ -78,11 +76,13 @@ class GameState extends StateEngine {
             camera.mvPushMatrix();
 
 
-            mat4.translate(camera.mvMatrix, [0, 0, 0]);
-            //mat4.rotate(camera.mvMatrix, this.degToRad(-90), [0, 1, 0]);
-            //mat4.rotate(camera.mvMatrix, this.degToRad(-90), [1, 0, 0]);
+            //mat4.translate(camera.mvMatrix,camera.eye);
+            mat4.translate(camera.mvMatrix, camera.eye);
+            //mat4.rotate(camera.mvMatrix, helpers.degToRad(this.xRot),[1, 1, 1]);
+            //mat4.rotate(camera.mvMatrix, helpers.degToRad(-90), [0, 1, 0]);
+            //mat4.rotate(camera.mvMatrix, helpers.degToRad(-90), [1, 0, 0]);
 
-            //mat4.rotate(camera.mvMatrix, this.degToRad(this.medic.angle), [1, 0, 0]);
+            //mat4.rotate(camera.mvMatrix, helpers.degToRad(this.medic.angle), [1, 0, 0]);
 
             gl.uniform1f(shaderProgram.uMaterialShininess, 200.0);
 
@@ -103,7 +103,7 @@ class GameState extends StateEngine {
 
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.medic.model.indexPositionBuffer);
 
-            //this.setMatrixUniforms();
+            this.setMatrixUniforms();
             gl.drawElements(gl.TRIANGLES, this.medic.model.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
             // gl.disable(gl.BLEND);
             camera.mvPopMatrix();
@@ -116,7 +116,8 @@ class GameState extends StateEngine {
         //draw background
         camera.mvPushMatrix();
         mat4.translate(camera.mvMatrix, [0, 0, 0]);
-        //mat4.rotate(camera.mvMatrix, this.degToRad(-this.xRot), [1, 1, 1]);
+       // mat4.rotate(camera.mvMatrix(-90)
+        //mat4.rotate(camera.mvMatrix, helpers.degToRad(this.xRot),[1, 0, 0]);
         //mat4.translate(camera.mvMatrix, [0, 0, -10]);
         //mat4.scale(camera.mvMatrix, [0.219, 0.212, 0.212]);
 
@@ -142,7 +143,7 @@ class GameState extends StateEngine {
 
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.background.indexPositionBuffer);
-        //this.setMatrixUniforms();
+        this.setMatrixUniforms();
         gl.drawElements(gl.TRIANGLES, this.background.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 
         camera.mvPopMatrix();
@@ -177,14 +178,16 @@ class GameState extends StateEngine {
         gl.uniform1f(shaderProgram.uMaterialShininess, 200.0);
 
 
-        //gl.useProgram(shaderProgram);
 
         //mat4.inverse(mvMatrix,cMatrix);     //Obtain Camera Matrix from Model-View Matrix
         //displayMatrix(mvMatrix);
         //gl.uniformMatrix4fv(prg.uMVMatrix, false, mvMatrix);
 
         camera.move();
-        this.setMatrixUniforms();
+
+
+
+        //this.setMatrixUniforms();
 
         this.drawGround();
 
@@ -210,7 +213,7 @@ class GameState extends StateEngine {
 
 
     setMatrixUniforms() {
-        mat4.inverse(camera.mvMatrix, camera.cMatrix);
+        //mat4.inverse(camera.mvMatrix, camera.cMatrix);
         gl.uniformMatrix4fv(shaderProgram.uPMatrix, false, camera.pMatrix);
         gl.uniformMatrix4fv(shaderProgram.uMVMatrix, false, camera.mvMatrix);
 

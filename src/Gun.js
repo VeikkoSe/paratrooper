@@ -51,8 +51,8 @@ class Gun {
                 if (timeNow - this.bullets[i].deathtime > this.bullets[i].birthTime)
                     this.bullets[i].visible = 0;
 
-                var posX = this.bullets[i].speed * ( elapsed / 1000.0 ) * Math.cos(this.degToRad(this.bullets[i].angle));
-                var posY = this.bullets[i].speed * ( elapsed / 1000.0 ) * Math.sin(this.degToRad(this.bullets[i].angle));
+                var posX = this.bullets[i].speed * ( elapsed / 1000.0 ) * Math.cos(helpers.degToRad(this.bullets[i].angle));
+                var posY = this.bullets[i].speed * ( elapsed / 1000.0 ) * Math.sin(helpers.degToRad(this.bullets[i].angle));
 
                 this.bullets[i].xPos += posX;
                 this.bullets[i].yPos += posY;
@@ -76,9 +76,6 @@ class Gun {
         this.lastTime = timeNow;
     }
 
-    degToRad(degrees) {
-        return degrees * Math.PI / 180;
-    }
 
 
     checkHit() {

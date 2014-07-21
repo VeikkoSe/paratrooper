@@ -39,15 +39,11 @@ var GameState = function GameState(canvas) {
     }
     this.lastTime = timeNow;
   },
-  degToRad: function(degrees) {
-    "use strict";
-    return degrees * Math.PI / 180;
-  },
   drawMedic: function() {
     "use strict";
     if (this.medic.visible == 1) {
       camera.mvPushMatrix();
-      mat4.translate(camera.mvMatrix, [0, 0, 0]);
+      mat4.translate(camera.mvMatrix, camera.eye);
       gl.uniform1f(shaderProgram.uMaterialShininess, 200.0);
       gl.bindBuffer(gl.ARRAY_BUFFER, this.medic.model.vertexPositionBuffer);
       gl.vertexAttribPointer(shaderProgram.aVertexPosition, 3, gl.FLOAT, false, 0, 0);
@@ -59,6 +55,7 @@ var GameState = function GameState(canvas) {
       gl.bindTexture(gl.TEXTURE_2D, this.medic.model.texture);
       gl.uniform1i(shaderProgram.samplerUniform, 0);
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.medic.model.indexPositionBuffer);
+      this.setMatrixUniforms();
       gl.drawElements(gl.TRIANGLES, this.medic.model.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
       camera.mvPopMatrix();
     }
@@ -78,6 +75,7 @@ var GameState = function GameState(canvas) {
     gl.bindTexture(gl.TEXTURE_2D, this.background.texture);
     gl.uniform1i(shaderProgram.samplerUniform, 0);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.background.indexPositionBuffer);
+    this.setMatrixUniforms();
     gl.drawElements(gl.TRIANGLES, this.background.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
     camera.mvPopMatrix();
   },
@@ -98,13 +96,11 @@ var GameState = function GameState(canvas) {
     gl.uniform3f(shaderProgram.uLightSpecular, 0.8, 0.8, 0.8);
     gl.uniform1f(shaderProgram.uMaterialShininess, 200.0);
     camera.move();
-    this.setMatrixUniforms();
     this.drawGround();
     this.drawMedic();
   },
   setMatrixUniforms: function() {
     "use strict";
-    mat4.inverse(camera.mvMatrix, camera.cMatrix);
     gl.uniformMatrix4fv(shaderProgram.uPMatrix, false, camera.pMatrix);
     gl.uniformMatrix4fv(shaderProgram.uMVMatrix, false, camera.mvMatrix);
     var normalMatrix = mat3.create();

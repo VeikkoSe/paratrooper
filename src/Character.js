@@ -41,9 +41,9 @@ class Character {
 
         var angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
 
-        printMessage(deltaX);
-        var dirVectorX = Math.cos(this.degToRad(angleInDegrees));
-        var dirVectorY = Math.sin(this.degToRad(angleInDegrees));
+
+        var dirVectorX = Math.cos(helpers.degToRad(angleInDegrees));
+        var dirVectorY = Math.sin(helpers.degToRad(angleInDegrees));
 
         this.velocityX = dirVectorX * ( elapsed / 1000.0 );
         this.velocityY = dirVectorY * ( elapsed / 1000.0 );
@@ -54,9 +54,7 @@ class Character {
 
     }
 
-    degToRad(degrees) {
-        return degrees * Math.PI / 180;
-    }
+
 
     checkHit() {
 

@@ -6,31 +6,34 @@ var ActionMapper = function ActionMapper() {
 ($traceurRuntime.createClass)(ActionMapper, {
   handleMouseDown: function(e) {
     "use strict";
-    this.mouseDown = true;
-    if (this.mouseDown) {
-      var x = (e.offsetX || e.clientX - $(e.target).offset().left);
-      var y = (e.offsetY || e.clientY - $(e.target).offset().top);
-    }
-    this.mouseDown = false;
+  },
+  getMousePos: function(canvas, evt) {
+    "use strict";
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
   },
   handleMouseUp: function(event) {
     "use strict";
-    this.mouseDown = false;
+    var w = 1280;
+    var h = 720;
+    var x = (event.offsetX - w / 2) / (w / 2);
+    var y = -(event.offsetY - h / 2) / (h / 2);
+    var viewportArray = [0, 0, w, h];
+    var modelPointArrayResultsNear = [];
+    var success = GLU.unProject(x, y, 0, camera.mvMatrix, camera.pMatrix, viewportArray, modelPointArrayResultsNear);
+    var modelPointArrayResultsFar = [];
+    var success = GLU.unProject(x, y, 1, camera.mvMatrix, camera.pMatrix, viewportArray, modelPointArrayResultsFar);
+    camera.eye = intersectionpoint(modelPointArrayResultsNear, modelPointArrayResultsFar);
+    console.log(modelPointArrayResultsNear);
+    console.log(modelPointArrayResultsFar);
   },
   handleMouseMove: function(e) {
     "use strict";
-    var canvas = document.getElementById("canvas");
-    var x = 0;
-    var y = 0;
-    if (e.x != undefined && e.y != undefined) {
-      x = e.x;
-      y = e.y;
-    } else {
-      x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-      y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-    }
-    x -= canvas.offsetLeft;
-    y -= canvas.offsetTop;
+    var x = helpers.getMouseX(e);
+    var y = helpers.getMouseY(e);
     camera.slideLeft = false;
     camera.slideRight = false;
     camera.slideUp = false;

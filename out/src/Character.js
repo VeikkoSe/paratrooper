@@ -26,17 +26,12 @@ var Character = function Character() {
     var deltaY = this.newYpos - this.yPos;
     var deltaX = this.newXpos - this.xPos;
     var angleInDegrees = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
-    printMessage(deltaX);
-    var dirVectorX = Math.cos(this.degToRad(angleInDegrees));
-    var dirVectorY = Math.sin(this.degToRad(angleInDegrees));
+    var dirVectorX = Math.cos(helpers.degToRad(angleInDegrees));
+    var dirVectorY = Math.sin(helpers.degToRad(angleInDegrees));
     this.velocityX = dirVectorX * (elapsed / 1000.0);
     this.velocityY = dirVectorY * (elapsed / 1000.0);
     this.xPos += this.velocityX;
     this.yPos += this.velocityY;
-  },
-  degToRad: function(degrees) {
-    "use strict";
-    return degrees * Math.PI / 180;
   },
   checkHit: function() {
     "use strict";

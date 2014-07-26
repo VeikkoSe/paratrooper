@@ -48,11 +48,9 @@ class InitState extends StateEngine {
             that.tick()
         });
 
-
         //this.animate();
         this.drawScene();
     }
-
 
     drawIntro() {
 

@@ -31,8 +31,6 @@ class Helpers  {
 
         return x;
 
-
-
     }
     getMouseY(e)
     {

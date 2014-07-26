@@ -9,11 +9,14 @@ class Game {
         this.camera = new Camera();
         this.stateEngine = new StateEngine();
 
-        this.initGL(canvas);
+        //this.initGL(canvas);
 
 
         this.stateEngine.changeState("gamestate");
+        //this.picker = new Picker();
         this.tick();
+        //this.stateEngine.currentState.tick();
+
 
 
     }
@@ -27,23 +30,13 @@ class Game {
         });
 
         this.stateEngine.currentState.animate();
-        this.stateEngine.currentState.drawScene();
+        this.stateEngine.currentState.render();
 
     }
 
 
-    initGL(canvas) {
-        try {
-            //gl = canvas.getContext("webgl");
-            gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl"));
-            //gl = WebGLDebugUtils.makeDebugContext(gl, undefined, logGLCall);
-            gl.viewportWidth = canvas.width;
-            gl.viewportHeight = canvas.height;
-        } catch (e) {
 
-        }
-        if (!gl) {
-            alert("Could not initialise WebGL, sorry :-(");
-        }
-    }
+
+
+
 }

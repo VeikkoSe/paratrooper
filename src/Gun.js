@@ -77,7 +77,6 @@ class Gun {
     }
 
 
-
     checkHit() {
 
         for (var i = 0; i < this.bulletsAmount; i++) {

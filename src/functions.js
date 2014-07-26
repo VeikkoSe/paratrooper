@@ -73,15 +73,17 @@ function initShaders(id) {
     program.uLightDiffuse = gl.getUniformLocation(program, "uLightDiffuse");
     program.uLightSpecular = gl.getUniformLocation(program, "uLightSpecular");
 
+    program.uMaterialDiffuse   = gl.getUniformLocation(program, "uMaterialDiffuse");
+
 
     program.alphaUniform = gl.getUniformLocation(program, "uAlpha");
-    program.useLightingUniform = gl.getUniformLocation(program, "uUseLighting");
+    program.uUseLighting = gl.getUniformLocation(program, "uUseLighting");
+    program.uDrawColors = gl.getUniformLocation(program, "uDrawColors");
     return program;
 
 }
 
 function getShader(id, program) {
-
 
     var vs_source = null, fs_source = null;
     $.ajax({
@@ -171,25 +173,19 @@ function viewport(){
 function webGLStart() {
 
     var canvas = document.getElementById("canvas");
-
+    initGL(canvas);
     helpers = new Helpers();
     camera = new Camera();
-
+    picker = new Picker(canvas);
     game = new Game(canvas);
 
 
-    //canvas.onmousedown = game.stateEngine.gameState.actionMapper.handleMouseDown;
 
     document.onmouseup = game.stateEngine.gameState.actionMapper.handleMouseUp;
     document.onmousemove = game.stateEngine.gameState.actionMapper.handleMouseMove;
     document.onmousedown = game.stateEngine.gameState.actionMapper.handleMouseDown;
-    //Game.canvas.
-    //canvas.addEventListener('mousedown', game.stateEngine.gameState.actionMapper.handleMouseDown, false);
-    //canvas.addEventListener('mouseup', game.stateEngine.gameState.actionMapper.handleMouseUp, false);
-    //canvas.addEventListener('mousemove', game.stateEngine.gameState.actionMapper.handleMouseUp, false);
 
 
-    //game.changeState("init");
 
 
 
@@ -254,4 +250,34 @@ function intersectionpoint(A,B)
         return [x, 0, z];
 
 
+}
+
+
+
+function objectLabelGenerator(){
+    var color = [Math.random(), Math.random(),Math.random(),1.0];
+    var key = color[0] + ':' + color[1] + ':' + color[2];
+    if (key in colorset){
+        return uniqueColorGenerator();
+    }
+    else {
+        colorset[key] = true;
+        return color;
+    }
+}
+
+
+function initGL(canvas) {
+    try {
+        //gl = canvas.getContext("webgl");
+        gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl"));
+        //gl = WebGLDebugUtils.makeDebugContext(gl, undefined, logGLCall);
+        gl.viewportWidth = canvas.width;
+        gl.viewportHeight = canvas.height;
+    } catch (e) {
+
+    }
+    if (!gl) {
+        alert("Could not initialise WebGL, sorry :-(");
+    }
 }

@@ -13,8 +13,8 @@ class Camera {
         this.eye = vec3.create([0,0,0]) ;  // negation of actual eye position
 
         this.x = 0;
-        this.y = -68;
-        this.z = -47;
+        this.y = -45;
+        this.z = -70;
         this.slideLeft = false;
         this.slideRight = false;
         this.slideUp = false;

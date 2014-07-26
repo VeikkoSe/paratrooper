@@ -14,7 +14,7 @@ class Medic extends Character {
         this.acceleration = 5;
 
 
-        this.model = new Model('ship');
+        this.model = new Model('medic');
 
         this.visible = 1;
 

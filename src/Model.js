@@ -74,8 +74,8 @@ class Model {
         //  this.normals = d.normals;
 
 
-    }
 
+    }
 
     createNormals(vs, ind) {
         var x = 0;

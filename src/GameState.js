@@ -16,6 +16,7 @@ class GameState extends StateEngine {
         this.actionMapper = new ActionMapper();
 
 
+
     }
 
     init() {
@@ -29,7 +30,16 @@ class GameState extends StateEngine {
 
         this.background = new Model('background');
 
-        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+
+        gl.clearColor(0.3,0.3,0.3, 1.0);
+        gl.clearDepth(1.0);
+
+        gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LESS);
+
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
 
 
     }
@@ -75,6 +85,7 @@ class GameState extends StateEngine {
 
             camera.mvPushMatrix();
 
+            gl.uniform3fv(shaderProgram.uMaterialDiffuse, this.medic.model.diffuse);
 
             //mat4.translate(camera.mvMatrix,camera.eye);
             mat4.translate(camera.mvMatrix, camera.eye);
@@ -116,6 +127,7 @@ class GameState extends StateEngine {
         //draw background
         camera.mvPushMatrix();
         mat4.translate(camera.mvMatrix, [0, 0, 0]);
+        gl.uniform3fv(shaderProgram.uMaterialDiffuse, this.background.diffuse);
        // mat4.rotate(camera.mvMatrix(-90)
         //mat4.rotate(camera.mvMatrix, helpers.degToRad(this.xRot),[1, 0, 0]);
         //mat4.translate(camera.mvMatrix, [0, 0, -10]);
@@ -150,19 +162,34 @@ class GameState extends StateEngine {
 
     }
 
+    render(){
+        gl.useProgram(shaderProgram);
+        //off-screen rendering
+        gl.bindFramebuffer(gl.FRAMEBUFFER, picker.framebuffer);
+        gl.uniform1i(shaderProgram.uDrawColors, 1);
+        //gl.uniform1i(Program.uOffscreen, true);
+        this.drawScene();
+        gl.uniform1i(shaderProgram.uDrawColors, 0);
+        //on-screen rendering
+        //gl.uniform1i(Program.uOffscreen, showPickingImage);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        this.drawScene();
+    }
+
 
     drawScene() {
 
 
-        gl.useProgram(shaderProgram);
+
 
 
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        gl.uniform1i(shaderProgram.useLightingUniform, true);
+        gl.uniform1i(shaderProgram.uUseLighting, 1);
         gl.uniform1f(shaderProgram.alphaUniform, 1);
 
-        gl.disable(gl.DEPTH_TEST);
+        gl.enable(gl.DEPTH_TEST);
+        gl.disable(gl.BLEND);
 
         //Light uniforms
         var x = $('#slider-x').slider("value");

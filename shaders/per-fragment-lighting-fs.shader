@@ -1,4 +1,4 @@
-precision mediump float;
+ precision mediump float;
 
 varying vec3 vTransformedNormal;
 varying vec4 vPosition;
@@ -11,10 +11,12 @@ uniform vec3 uLightAmbient;
 uniform vec3 uLightPosition;
 uniform vec3 uLightSpecular;
 uniform vec3 uLightDiffuse;
+uniform vec3 uMaterialDiffuse;   //object diffuse property
 uniform sampler2D uSampler;
 uniform float uAlpha;
 //blended element is drawn without lightning so it's always really bright
 uniform bool uUseLighting;
+uniform bool uDrawColors;
 
 void main(void) {
     vec3 lightWeighting;
@@ -31,15 +33,21 @@ void main(void) {
 
     float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
     if(uUseLighting)
-        lightWeighting = uLightAmbient + uLightSpecular * specularLightWeighting + uLightDiffuse * diffuseLightWeighting;
+        lightWeighting = uLightAmbient + uLightSpecular * specularLightWeighting + uLightDiffuse * uMaterialDiffuse * diffuseLightWeighting;
     else
-        lightWeighting = vec3(1.0, 1.0, 1.0);
+        lightWeighting = lightWeighting = vec3(1.0, 1.0, 1.0);;
 
 
+    if(uDrawColors)
+    {
+        gl_FragColor = vec4(uMaterialDiffuse[0], uMaterialDiffuse[1], uMaterialDiffuse[2], 1.0);
+    }
+    else
+    {
+        vec4 fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a * uAlpha);
+    }
 
-    //vec4 fragmentColor = vec4(1.0, 1.0, 1.0, 1.0);
-    vec4 fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
-
-    gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a * uAlpha);
 }
+
 

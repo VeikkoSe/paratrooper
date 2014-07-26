@@ -13,7 +13,6 @@ class Infiltrator extends Character {
         this.speed = 0;
         this.acceleration = 5;
 
-
         this.model = new Model('ship');
 
         this.visible = 1;
@@ -23,7 +22,6 @@ class Infiltrator extends Character {
 
         this.acceleration = 10;
         this.lifes = 5;
-
 
     }
 

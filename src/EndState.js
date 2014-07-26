@@ -20,6 +20,7 @@ class EndState extends StateEngine {
     }
 
 
+
     init() {
 
         //particleProgram = initParticleShaders("particle");
@@ -29,7 +30,6 @@ class EndState extends StateEngine {
 
 
         this.background = new Model('end');
-
 
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
 

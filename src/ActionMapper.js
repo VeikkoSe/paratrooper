@@ -8,18 +8,54 @@ class ActionMapper {
     }
 
 
-    handleMouseDown(e) {
+    handleMouseDown(event) {
+
+
+        //this.x = ev.clientX;
+        //this.y = ev.clientY;
+       // this.button = ev.button;
+       // this.dstep = Math.max(this.camera.position[0],this.camera.position[1],this.camera.position[2])/100;
+
+        //if (this.picker == null) return;
+
+        //var coords = this.get2DCoords(ev);
+
+
+        var w = 1280;
+        var h = 720;
+
+        //var x = (mouseX(event) - w / 2) / (w / 2);
+        var x = mouseX(event);
+        var y = h-mouseY(event);
+        if(x<0)
+        x = 0;
+        if(x>1280)
+            x = 1280;
+        if(y<0)
+            y = 0;
+        if(y>720)
+            y = 720;
+
+        console.log(x);
+        console.log(y);
+        console.log('h');
+        this.picking = picker.find([x,y]);
+        console.log(this.picking);
         /*
-        this.mouseDown = true;
-        if(this.mouseDown) {
-            var x = helpers.getMouseX(e);
-            var y = helpers.getMouseY(e);
-            game.stateEngine.gameState.medic.newXpos = x;
-            game.stateEngine.gameState.medic.newYpos = y;
+        if (this.picking){
+            var count = this.picker.plist.length;
+            var message = count==1?count+' object has been selected': count+' objects have been selected';
+            $('#title-id').html(message);
         }
-        printMessage("X:"+x+"Y:"+y);
-        this.mouseDown = false;
+        else{
+            this.picker.stop();
+            $('#title-id').html('Please select an object and drag it. (Alt key drags on the camera axis)');
+        }
         */
+
+
+
+
     }
 
     getMousePos(canvas, evt) {
@@ -34,25 +70,19 @@ class ActionMapper {
 
 
 
-
-//console.log(gl.viewportWidth);
-
         var w = 1280;
         var h = 720;
 
-        var x = (event.offsetX - w / 2) / (w / 2);
-        var y = -(event.offsetY - h / 2) / (h / 2);
+        var x = (mouseX(event) - w / 2) / (w / 2);
+        var y = -(mouseY(event) - h / 2) / (h / 2);
 
 
         var viewportArray = [
             0, 0, w , h
         ];
 
-// The results of the operation will be stored in this array.
+        // The results of the operation will be stored in this array.
         var modelPointArrayResultsNear = [];
-
-
-
 
 
         var success = GLU.unProject(
@@ -64,70 +94,18 @@ class ActionMapper {
         var modelPointArrayResultsFar = [];
 
 
-
-
-
         var success = GLU.unProject(
             x, y, 1,
             camera.mvMatrix, camera.pMatrix,
             viewportArray, modelPointArrayResultsFar);
 
 
-
-        camera.eye = intersectionpoint(modelPointArrayResultsNear,modelPointArrayResultsFar);
-
+        camera.eye = intersectionpoint(modelPointArrayResultsNear, modelPointArrayResultsFar);
 
 
-        console.log(modelPointArrayResultsNear);
-        console.log(modelPointArrayResultsFar);
-//        modelPointArrayResultsFar[0] = modelPointArrayResultsFar[0]/10;
-  //      modelPointArrayResultsFar[1] = modelPointArrayResultsFar[1]/10;
-    //    modelPointArrayResultsFar[2] = 0;
+        //console.log(modelPointArrayResultsNear);
+        //console.log(modelPointArrayResultsFar);
 
-        //camera.eye =modelPointArrayResultsFar;
-        //var pos = getMousePos(document.getElementById('canvas'),event);
-
-
-
-
-        //console.log(unproject(100,100,1));
-
-
-
-/*
-        this.mouseDown = false;
-
-
-        var world1 = [0,0,0,0] ;
-        var world2 = [0,0,0,0] ;
-        var dir = [0,0,0] ;
-        var target = event.target != null ? event.target : event.srcElement;
-
-        var w = event.srcElement.clientWidth ;
-        var h = event.srcElement.clientHeight ;
-
-        // calculate x,y clip space coordinates
-        var x = (event.offsetX-w/2)/(w/2) ;
-        var y = -(event.offsetY-h/2)/(h/2) ;
-
-        //var x = getMouseX(event);
-        //var y = getMouseY(event);
-        mat4.inverse(camera.pvMatrix, camera.pvMatrixInverse) ;
-        // convert clip space coordinates into world space
-        mat4.multiplyVec4(camera.pvMatrixInverse, [x,y,-1,1], world1) ;
-       // vec3.scale(world1,1/world1[3]) ;
-        mat4.multiplyVec4(camera.pvMatrixInverse, [x,y,0,1], world2) ;
-        //vec3.scale(world2,1/world2[3]) ;
-        // calculate world space view vector
-        vec3.subtract(world2,world1,dir) ;
-        vec3.normalize(dir) ;
-        //vec3.scale(dir,0.3) ;
-        // move eye in direction of world space view vector
-        vec3.subtract(camera.eye,dir) ;
-
-        console.log(camera.eye);
-
-*/
 
     }
 
@@ -146,69 +124,66 @@ class ActionMapper {
         //var ydiv = (y / screenHeight);
         //var xdiv = (x / screenWidth);
 
-         //We disable edge movement for now
-        if(x<20)
-            camera.slideLeft = true;
+        if ($('#controlEdgeMovement').prop('checked')) {
+            if (x < 20)
+                camera.slideLeft = true;
 
-        if(x >(resolutionWidth-20))
-            camera.slideRight = true;
+            if (x > (resolutionWidth - 20))
+                camera.slideRight = true;
 
-        if(y<20)
-          camera.slideUp = true;
+            if (y < 20)
+                camera.slideUp = true;
 
-        if(y>(resolutionHeight-20))
-            camera.slideDown = true;
+            if (y > (resolutionHeight - 20))
+                camera.slideDown = true;
 
-
+        }
 
 
     }
 
 
+    /*
+     handleKeyDown(event) {
+     currentlyPressedKeys[event.keyCode] = true;
+     }
 
-
-/*
-    handleKeyDown(event) {
-        currentlyPressedKeys[event.keyCode] = true;
-    }
-
-    handleKeyUp(event) {
-        currentlyPressedKeys[event.keyCode] = false;
-    }
-    */
+     handleKeyUp(event) {
+     currentlyPressedKeys[event.keyCode] = false;
+     }
+     */
 
     handleKeys(elapsed) {
 
         //game.ship.setAccelerationOff(elapsed);
         //up
         /*
-        if (currentlyPressedKeys[38]) {
-            game.stateEngine.gameState.medic.setAccelerationOn(elapsed);
-        }
-        */
+         if (currentlyPressedKeys[38]) {
+         game.stateEngine.gameState.medic.setAccelerationOn(elapsed);
+         }
+         */
         //down
         /*
-        if (currentlyPressedKeys[40]) {
-            //game.ship.removeSpeed();
-        }
-        //left
-        if (currentlyPressedKeys[37]) {
-            game.stateEngine.gameState.medic.rotateLeft(elapsed);
-        }
-        //right
-        if (currentlyPressedKeys[39]) {
-            game.stateEngine.gameState.medic.rotateRight(elapsed);
-        }
-        */
+         if (currentlyPressedKeys[40]) {
+         //game.ship.removeSpeed();
+         }
+         //left
+         if (currentlyPressedKeys[37]) {
+         game.stateEngine.gameState.medic.rotateLeft(elapsed);
+         }
+         //right
+         if (currentlyPressedKeys[39]) {
+         game.stateEngine.gameState.medic.rotateRight(elapsed);
+         }
+         */
         //spacebar
         /*
-        if (currentlyPressedKeys[32]) {
-            game.stateEngine.gameState.gun.shootBullet(elapsed);
+         if (currentlyPressedKeys[32]) {
+         game.stateEngine.gameState.gun.shootBullet(elapsed);
 
-        }
-        */
+         }
+         */
     }
-
 
 
 }

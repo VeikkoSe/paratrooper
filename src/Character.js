@@ -25,13 +25,13 @@ class Character {
 
     }
 
+
     setAccelerationOn(elapsed) {
 
 
         //this.newEngineSmoke();
 
     }
-
 
     move(elapsed) {
 

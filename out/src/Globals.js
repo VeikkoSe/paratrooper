@@ -9,4 +9,6 @@ var resolutionWidth = 1280;
 var resolutionHeight = 720;
 var texture = null;
 var camera = null;
+var picker = null;
 var helpers = null;
+var colorset = {};

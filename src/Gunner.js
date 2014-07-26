@@ -24,7 +24,6 @@ class Gunner extends Character {
         this.acceleration = 10;
         this.lifes = 5;
 
-
     }
 
 }

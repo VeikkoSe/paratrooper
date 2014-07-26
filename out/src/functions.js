@@ -43,8 +43,10 @@ function initShaders(id) {
   program.uLightAmbient = gl.getUniformLocation(program, "uLightAmbient");
   program.uLightDiffuse = gl.getUniformLocation(program, "uLightDiffuse");
   program.uLightSpecular = gl.getUniformLocation(program, "uLightSpecular");
+  program.uMaterialDiffuse = gl.getUniformLocation(program, "uMaterialDiffuse");
   program.alphaUniform = gl.getUniformLocation(program, "uAlpha");
-  program.useLightingUniform = gl.getUniformLocation(program, "uUseLighting");
+  program.uUseLighting = gl.getUniformLocation(program, "uUseLighting");
+  program.uDrawColors = gl.getUniformLocation(program, "uDrawColors");
   return program;
 }
 function getShader(id, program) {
@@ -125,8 +127,10 @@ function viewport() {
 }
 function webGLStart() {
   var canvas = document.getElementById("canvas");
+  initGL(canvas);
   helpers = new Helpers();
   camera = new Camera();
+  picker = new Picker(canvas);
   game = new Game(canvas);
   document.onmouseup = game.stateEngine.gameState.actionMapper.handleMouseUp;
   document.onmousemove = game.stateEngine.gameState.actionMapper.handleMouseMove;
@@ -216,4 +220,24 @@ function intersectionpoint(A, B) {
   var x = (r * B[0] + A[0]) / (r + 1);
   var z = (r * B[2] + A[2]) / (r + 1);
   return [x, 0, z];
+}
+function objectLabelGenerator() {
+  var color = [Math.random(), Math.random(), Math.random(), 1.0];
+  var key = color[0] + ':' + color[1] + ':' + color[2];
+  if ($traceurRuntime.toProperty(key) in colorset) {
+    return uniqueColorGenerator();
+  } else {
+    $traceurRuntime.setProperty(colorset, key, true);
+    return color;
+  }
+}
+function initGL(canvas) {
+  try {
+    gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl"));
+    gl.viewportWidth = canvas.width;
+    gl.viewportHeight = canvas.height;
+  } catch (e) {}
+  if (!gl) {
+    alert("Could not initialise WebGL, sorry :-(");
+  }
 }

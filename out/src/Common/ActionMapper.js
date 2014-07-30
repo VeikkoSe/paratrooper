@@ -12,8 +12,8 @@ var ActionMapper = function ActionMapper() {
   },
   handleMouseDown: function(event) {
     "use strict";
-    actionMapper.setPicking(event);
-    actionMapper.setClickPosition(event);
+    if (!actionMapper.setPicking(event))
+      actionMapper.setClickPosition(event);
   },
   setPicking: function(event) {
     "use strict";
@@ -29,7 +29,9 @@ var ActionMapper = function ActionMapper() {
       y = resolutionHeight;
     console.log(x);
     console.log(y);
-    picker.findAndSet([x, y]);
+    if (picker.findAndSet([x, y]))
+      return true;
+    return false;
   },
   setClickPosition: function(event) {
     "use strict";

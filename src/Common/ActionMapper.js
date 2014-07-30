@@ -14,8 +14,8 @@ class ActionMapper {
     }
 
     handleMouseDown(event) {
-        actionMapper.setPicking(event);
-        actionMapper.setClickPosition(event);
+        if (!actionMapper.setPicking(event))
+            actionMapper.setClickPosition(event);
     }
 
     setPicking(event) {
@@ -35,7 +35,11 @@ class ActionMapper {
         console.log(x);
         console.log(y);
 
-        picker.findAndSet([x, y]);
+        if (picker.findAndSet([x, y]))
+            return true;
+
+        return false;
+
     }
 
     setClickPosition(event) {

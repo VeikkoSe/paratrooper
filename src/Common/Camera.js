@@ -13,8 +13,8 @@ class Camera {
         this.clickPosition = null;
 
         this.x = 0;
-        this.y = -35;
-        this.z = -100;
+        this.y = -25;
+        this.z = -70;
         this.slideLeft = false;
         this.slideRight = false;
         this.slideUp = false;

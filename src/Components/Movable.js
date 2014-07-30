@@ -1,12 +1,12 @@
 class Movable extends Component
 {
-  constructor() {
+  constructor(newXpos=0,newYpos=0,newZpos=0) {
 
       this.name = "Movable";
 
-      this.newYpos = 0;
-      this.newXpos = 0;
-      this.newZpos = 0;
+      this.newXpos = newXpos;
+      this.newYpos = newYpos;
+      this.newZpos = newZpos;
 
       this.angle = 90;
       this.lt = 0;

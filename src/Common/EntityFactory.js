@@ -1,7 +1,6 @@
 class EntityFactory {
     constructor() {
 
-        this.movable = new Movable();
         this.controllable = new Controllable();
 
     }
@@ -9,7 +8,7 @@ class EntityFactory {
     createMedic() {
 
         var e = em.addNew();
-        e.addComponent(this.movable);
+        e.addComponent(new Movable(0, 0, 0));
         e.addComponent(new Renderable(0, 0, 0));
         e.addComponent(new Selectable());
         e.addComponent(this.controllable);
@@ -20,7 +19,7 @@ class EntityFactory {
     createRanger() {
 
         var e = em.addNew();
-        e.addComponent(this.movable);
+        e.addComponent(new Movable(5, 0, 5));
         e.addComponent(new Renderable(5, 0, 5));
         e.addComponent(new Selectable());
         e.addComponent(this.controllable);
@@ -31,7 +30,7 @@ class EntityFactory {
     createGunner() {
 
         var e = em.addNew();
-        e.addComponent(this.movable);
+        e.addComponent(new Movable(10, 0, 5));
         e.addComponent(new Renderable(10, 0, 5));
         e.addComponent(new Selectable());
         e.addComponent(this.controllable);

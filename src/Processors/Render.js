@@ -48,9 +48,7 @@ class RenderProcess extends Processor {
                     camera.mvPopMatrix();
 
                 }
-
             }
         }
     }
-
 }

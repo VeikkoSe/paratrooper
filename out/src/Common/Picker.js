@@ -76,9 +76,12 @@ var Picker = function Picker() {
       }
       selectable.selected = false;
     }
-    if (newSelected)
+    if (newSelected) {
       newSelected.selected = true;
-    else if (oldSelected)
+      camera.clickPosition = null;
+      return true;
+    } else if (oldSelected)
       oldSelected.selected = true;
+    return false;
   }
 }, {});

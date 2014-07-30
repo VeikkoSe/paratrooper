@@ -5,7 +5,7 @@
 
     <meta http-equiv="content-type" content="text/html; charset=utf8">
     <link href="js/jquery-ui-1.11.0.custom/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
-
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
 
     <script type="text/javascript" src="js/gl/glMatrix-0.9.5.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.0.custom/external/jquery/jquery.js"></script>
@@ -15,27 +15,43 @@
     <script type="text/javascript" src="bower_components/traceur-runtime/traceur-runtime.js"></script>
     <script type="text/javascript" src="js/unproject.js"></script>
 
-    <script type="text/javascript" src="out/src/functions.js"></script>
-    <script type="text/javascript" src="out/src/Helpers.js"></script>
-    <script type="text/javascript" src="out/src/Character.js"></script>
-    <script type="text/javascript" src="out/src/Medic.js"></script>
-    <script type="text/javascript" src="out/src/Ranger.js"></script>
-    <script type="text/javascript" src="out/src/Infiltrator.js"></script>
-    <script type="text/javascript" src="out/src/Gunner.js"></script>
-    <script type="text/javascript" src="out/src/Camera.js"></script>
-    <script type="text/javascript" src="out/src/StateEngine.js"></script>
-    <script type="text/javascript" src="out/src/InitState.js"></script>
-    <script type="text/javascript" src="out/src/EndState.js"></script>
-    <script type="text/javascript" src="out/src/PauseState.js"></script>
-    <script type="text/javascript" src="out/src/GameState.js"></script>
-    <script type="text/javascript" src="out/src/Texture.js"></script>
-    <script type="text/javascript" src="out/src/Model.js"></script>
-    <script type="text/javascript" src="out/src/Bullet.js"></script>
-    <script type="text/javascript" src="out/src/Gun.js"></script>
-    <script type="text/javascript" src="out/src/Globals.js"></script>
-    <script type="text/javascript" src="out/src/Picker.js"></script>
-    <script type="text/javascript" src="out/src/Game.js"></script>
-    <script type="text/javascript" src="out/src/ActionMapper.js"></script>
+    <script type="text/javascript" src="out/src/Common/EntityManager.js"></script>
+    <script type="text/javascript" src="out/src/Common/EntityFactory.js"></script>
+    <script type="text/javascript" src="out/src/Common/functions.js"></script>
+    <script type="text/javascript" src="out/src/Common/Helpers.js"></script>
+    <script type="text/javascript" src="out/src/Common/Camera.js"></script>
+    <script type="text/javascript" src="out/src/Common/StateEngine.js"></script>
+    <script type="text/javascript" src="out/src/Common/GameState.js"></script>
+    <script type="text/javascript" src="out/src/Common/Texture.js"></script>
+    <script type="text/javascript" src="out/src/Common/Mesh.js"></script>
+    <script type="text/javascript" src="out/src/Common/Globals.js"></script>
+    <script type="text/javascript" src="out/src/Common/Picker.js"></script>
+    <script type="text/javascript" src="out/src/Common/Game.js"></script>
+    <script type="text/javascript" src="out/src/Common/ActionMapper.js"></script>
+
+    <script type="text/javascript" src="out/src/Entities/Entity.js"></script>
+    <script type="text/javascript" src="out/src/Entities/Medic.js"></script>
+
+    <script type="text/javascript" src="out/src/Components/Component.js"></script>
+    <script type="text/javascript" src="out/src/Components/AIControlled.js"></script>
+    <script type="text/javascript" src="out/src/Components/Controllable.js"></script>
+    <script type="text/javascript" src="out/src/Components/Movable.js"></script>
+    <script type="text/javascript" src="out/src/Components/Renderable.js"></script>
+    <script type="text/javascript" src="out/src/Components/Selectable.js"></script>
+    <script type="text/javascript" src="out/src/Components/MeshComponent.js"></script>
+
+
+    <script type="text/javascript" src="out/src/Processors/Processor.js"></script>
+    <script type="text/javascript" src="out/src/Processors/Move.js"></script>
+    <script type="text/javascript" src="out/src/Processors/Render.js"></script>
+    <script type="text/javascript" src="out/src/Processors/Character.js"></script>
+
+
+
+
+
+
+
 
 </head>
 <body >

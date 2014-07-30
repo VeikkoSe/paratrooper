@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="E:\\\git\\\git2\\\paratrooper\\\\\\paratrooper\\\ --sourcemap --experimental --out out\\\src\\\$FileName$ --script src\\\$FileName$ " />
+      <option name="arguments" value="E:\\\git\\\git2\\\paratrooper\\\\\\paratrooper\\\ --sourcemap --experimental --out out\\\src\\\Common\\\$FileName$ --script src\\\Common\\\$FileName$ " />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" value="Transpiles ECMAScript 6 code to ECMAScript 5" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -16,7 +16,67 @@
       <option name="outputFromStdout" value="false" />
       <option name="passParentEnvs" value="true" />
       <option name="program" value="E:/runtraceur.bat" />
-      <option name="scopeName" value="src" />
+      <option name="scopeName" value="common" />
+      <option name="trackOnlyRoot" value="true" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="E:\\\git\\\git2\\\paratrooper\\\\\\paratrooper\\\ --sourcemap --experimental --out out\\\src\\\Components\\\$FileName$ --script src\\\Components\\\$FileName$ " />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="Transpiles ECMAScript 6 code to ECMAScript 5" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Traceur compiler Copy" />
+      <option name="output" value="out/$FilePathRelativeToProjectRoot$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="program" value="E:/runtraceur.bat" />
+      <option name="scopeName" value="Components" />
+      <option name="trackOnlyRoot" value="true" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="E:\\\git\\\git2\\\paratrooper\\\\\\paratrooper\\\ --sourcemap --experimental --out out\\\src\\\Entities\\\$FileName$ --script src\\\Entities\\\$FileName$ " />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="Transpiles ECMAScript 6 code to ECMAScript 5" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Traceur compiler Copy Copy" />
+      <option name="output" value="out/$FilePathRelativeToProjectRoot$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="program" value="E:/runtraceur.bat" />
+      <option name="scopeName" value="Entities" />
+      <option name="trackOnlyRoot" value="true" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="E:\\\git\\\git2\\\paratrooper\\\\\\paratrooper\\\ --sourcemap --experimental --out out\\\src\\\Processors\\\$FileName$ --script src\\\Processors\\\$FileName$ " />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" value="Transpiles ECMAScript 6 code to ECMAScript 5" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="js" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="Traceur compiler Copy Copy" />
+      <option name="output" value="out/$FilePathRelativeToProjectRoot$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="passParentEnvs" value="true" />
+      <option name="program" value="E:/runtraceur.bat" />
+      <option name="scopeName" value="Processors" />
       <option name="trackOnlyRoot" value="true" />
       <option name="workingDir" value="$ProjectFileDir$" />
       <envs />

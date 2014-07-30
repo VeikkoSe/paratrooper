@@ -17,6 +17,8 @@ uniform float uAlpha;
 //blended element is drawn without lightning so it's always really bright
 uniform bool uUseLighting;
 uniform bool uDrawColors;
+uniform vec3 uDrawColor;
+
 
 void main(void) {
     vec3 lightWeighting;
@@ -40,7 +42,7 @@ void main(void) {
 
     if(uDrawColors)
     {
-        gl_FragColor = vec4(uMaterialDiffuse[0], uMaterialDiffuse[1], uMaterialDiffuse[2], 1.0);
+        gl_FragColor = vec4(uDrawColor[0], uDrawColor[1], uDrawColor[2], 1.0);
     }
     else
     {

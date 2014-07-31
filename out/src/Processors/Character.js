@@ -36,7 +36,7 @@ var $Character = Character;
               dirZ /= hyp;
               re.xPos += dirX * speed;
               re.zPos += dirZ * speed;
-              re.yPos = 0;
+              re.yPos = 1;
             }
           }
         }

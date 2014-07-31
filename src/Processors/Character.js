@@ -58,7 +58,7 @@ class Character extends Processor {
 
                             re.xPos += dirX*speed;
                             re.zPos += dirZ*speed;
-                            re.yPos =0;
+                            re.yPos =1;
 
                         }
 

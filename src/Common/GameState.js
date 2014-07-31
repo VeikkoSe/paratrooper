@@ -28,6 +28,7 @@ class GameState extends StateEngine {
         this.ef.createRanger();
         this.ef.createGunner();
         this.ef.createBackground();
+        this.ef.createHouse();
 
     }
 

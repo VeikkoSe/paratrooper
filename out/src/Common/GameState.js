@@ -20,6 +20,7 @@ var GameState = function GameState(canvas) {
     this.ef.createRanger();
     this.ef.createGunner();
     this.ef.createBackground();
+    this.ef.createHouse();
   },
   animate: function() {
     "use strict";

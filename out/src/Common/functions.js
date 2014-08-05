@@ -145,48 +145,48 @@ function updateRotation() {
 $(document).ready(function() {
   $('#slider-x').slider({
     value: 0.0,
-    min: -100,
-    max: 100,
+    min: -500,
+    max: 500,
     step: 0.1,
     slide: updateLightPosition,
     change: updateLightPosition
   });
   $('#slider-y').slider({
-    value: 68.0,
-    min: -100,
-    max: 100,
+    value: -400.0,
+    min: -500,
+    max: 500,
     step: 0.1,
     slide: updateLightPosition,
     change: updateLightPosition
   });
   $('#slider-z').slider({
-    value: 50,
-    min: -100,
-    max: 100,
+    value: -130,
+    min: -500,
+    max: 500,
     step: 0.1,
     slide: updateLightPosition,
     change: updateLightPosition
   });
   $('#cslider-x').slider({
-    value: 0,
-    min: -100,
-    max: 100,
+    value: -88,
+    min: -600,
+    max: 600,
     step: 0.1,
     slide: updateCameraPosition,
     change: updateCameraPosition
   });
   $('#cslider-y').slider({
-    value: 0,
-    min: -100,
-    max: 100,
+    value: -104,
+    min: -600,
+    max: 600,
     step: 0.1,
     slide: updateCameraPosition,
     change: updateCameraPosition
   });
   $('#cslider-z').slider({
-    value: 0,
-    min: -100,
-    max: 100,
+    value: -360,
+    min: -600,
+    max: 600,
     step: 0.1,
     slide: updateCameraPosition,
     change: updateCameraPosition

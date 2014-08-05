@@ -49,6 +49,17 @@ class EntityFactory {
 
     }
 
+
+    createTerrain() {
+
+        var e = em.addNew();
+        e.addComponent(new Renderable(0, 0, 0));
+        e.addComponent(new TerrainComponent(new Terrain("heightmap")));
+
+
+
+    }
+
     createHouse() {
 
 

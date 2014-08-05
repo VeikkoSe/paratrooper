@@ -201,13 +201,13 @@ function updateRotation() {
 
 $(document).ready(function () {
 
-    $('#slider-x').slider({value: 0.0, min: -100, max: 100, step: 0.1, slide: updateLightPosition, change: updateLightPosition});
-    $('#slider-y').slider({value: 68.0, min: -100, max: 100, step: 0.1, slide: updateLightPosition, change: updateLightPosition});
-    $('#slider-z').slider({value: 50, min: -100, max: 100, step: 0.1, slide: updateLightPosition, change: updateLightPosition});
+    $('#slider-x').slider({value: 0.0, min: -500, max: 500, step: 0.1, slide: updateLightPosition, change: updateLightPosition});
+    $('#slider-y').slider({value: -400.0, min: -500, max: 500, step: 0.1, slide: updateLightPosition, change: updateLightPosition});
+    $('#slider-z').slider({value: -130, min: -500, max: 500, step: 0.1, slide: updateLightPosition, change: updateLightPosition});
 
-    $('#cslider-x').slider({value: 0, min: -100, max: 100, step: 0.1, slide: updateCameraPosition, change: updateCameraPosition});
-    $('#cslider-y').slider({value: 0, min: -100, max: 100, step: 0.1, slide: updateCameraPosition, change: updateCameraPosition});
-    $('#cslider-z').slider({value: 0, min: -100, max: 100, step: 0.1, slide: updateCameraPosition, change: updateCameraPosition});
+    $('#cslider-x').slider({value: -88, min: -600, max: 600, step: 0.1, slide: updateCameraPosition, change: updateCameraPosition});
+    $('#cslider-y').slider({value: -104, min: -600, max: 600, step: 0.1, slide: updateCameraPosition, change: updateCameraPosition});
+    $('#cslider-z').slider({value: -360, min: -600, max: 600, step: 0.1, slide: updateCameraPosition, change: updateCameraPosition});
 
     $('#rslider-x').slider({value: 0, min: 0, max: 360, step: 0.1, slide: updateRotation, change: updateRotation});
 

@@ -1,6 +1,7 @@
 var GameState = function GameState(canvas) {
   "use strict";
   this.renderProcess = new RenderProcess();
+  this.terrainProcess = new TerrainProcess();
   this.characterProcess = new Character();
   this.ef = new EntityFactory();
 };
@@ -9,7 +10,6 @@ var GameState = function GameState(canvas) {
     "use strict";
     particleProgram = initParticleShaders("particle");
     shaderProgram = initShaders("per-fragment-lighting");
-    gl.enable(gl.CULL_FACE);
     gl.clearColor(0.3, 0.3, 0.3, 1.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
@@ -17,10 +17,7 @@ var GameState = function GameState(canvas) {
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     this.ef.createMedic();
-    this.ef.createRanger();
-    this.ef.createGunner();
-    this.ef.createBackground();
-    this.ef.createHouse();
+    this.ef.createTerrain();
   },
   animate: function() {
     "use strict";
@@ -54,5 +51,6 @@ var GameState = function GameState(canvas) {
     gl.uniform1f(shaderProgram.uMaterialShininess, 200.0);
     camera.move();
     this.renderProcess.draw();
+    this.terrainProcess.draw();
   }
 }, {}, StateEngine);

@@ -43,10 +43,12 @@ void main(void) {
     if(uDrawColors)
     {
         gl_FragColor = vec4(uDrawColor[0], uDrawColor[1], uDrawColor[2], 1.0);
+
     }
     else
     {
-        vec4 fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        //vec4 fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        vec4 fragmentColor = vec4(1.0, 0.0, 1.0, 1.0);
         gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a * uAlpha);
     }
 

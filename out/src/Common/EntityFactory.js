@@ -36,6 +36,12 @@ var EntityFactory = function EntityFactory() {
     e.addComponent(new Renderable(0, 0, 0));
     e.addComponent(new MeshComponent(new Mesh("background")));
   },
+  createTerrain: function() {
+    "use strict";
+    var e = em.addNew();
+    e.addComponent(new Renderable(0, 0, 0));
+    e.addComponent(new TerrainComponent(new Terrain("heightmap")));
+  },
   createHouse: function() {
     "use strict";
     var mesh = new Mesh("house");

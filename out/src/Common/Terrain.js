@@ -1,44 +1,48 @@
 var Terrain = function Terrain(heightmap) {
   "use strict";
-  var t = new Texture(heightmap);
-  this.texture = t.loadedTexture;
-  this.data = this.getHeightData(this.texture.image);
-  this.plane = this.buildPlane(200, 128);
-  var j = 0;
-  for (var i = 1; i < this.plane[1].length; i = i + 3) {
-    $traceurRuntime.setProperty(this.plane[1], i, this.data[$traceurRuntime.toProperty(j)]);
-    j++;
-  }
-  this.plane.push(this.createNormals(this.plane[1], this.plane[0]));
+  this.texture = new Texture(heightmap);
+  this.data = null;
+  this.initDone = 0;
   this.vertexPositionBuffer = gl.createBuffer();
   this.texturePositionBuffer = gl.createBuffer();
   this.indexPositionBuffer = gl.createBuffer();
   this.normalPositionBuffer = gl.createBuffer();
-  var fakeTextures = [];
-  var c = 0;
-  for (var i = 0; i < this.plane[2].length; i++) {
-    $traceurRuntime.setProperty(fakeTextures, c, 0);
-    c++;
-    $traceurRuntime.setProperty(fakeTextures, c, 1);
-    c++;
-  }
-  gl.bindBuffer(gl.ARRAY_BUFFER, this.texturePositionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(fakeTextures), gl.STATIC_DRAW);
-  gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[1]), gl.STATIC_DRAW);
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexPositionBuffer);
-  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.plane[0]), gl.STATIC_DRAW);
-  this.indexPositionBuffer.numItems = this.plane[0].length;
-  gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[2]), gl.STATIC_DRAW);
 };
 ($traceurRuntime.createClass)(Terrain, {
+  createData: function() {
+    "use strict";
+    this.data = this.getHeightData(this.texture.loadedTexture.image);
+    this.plane = this.buildPlane(200, 128);
+    var j = 0;
+    for (var i = 1; i < this.plane[1].length; i = i + 3) {
+      $traceurRuntime.setProperty(this.plane[1], i, this.data[$traceurRuntime.toProperty(j)]);
+      j++;
+    }
+    this.plane.push(this.createNormals(this.plane[1], this.plane[0]));
+    var fakeTextures = [];
+    var c = 0;
+    for (var i = 0; i < this.plane[2].length; i++) {
+      $traceurRuntime.setProperty(fakeTextures, c, 0);
+      c++;
+      $traceurRuntime.setProperty(fakeTextures, c, 1);
+      c++;
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.texturePositionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(fakeTextures), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[1]), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexPositionBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.plane[0]), gl.STATIC_DRAW);
+    this.indexPositionBuffer.numItems = this.plane[0].length;
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[2]), gl.STATIC_DRAW);
+  },
   getHeightData: function(img) {
     "use strict";
     var canvas = document.createElement('canvas');
     canvas.width = 128;
     canvas.height = 128;
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext('2d', {preserveDrawingBuffer: true});
     var size = 128 * 128;
     var data = new Float32Array(size);
     context.drawImage(img, 0, 0);
@@ -53,6 +57,7 @@ var Terrain = function Terrain(heightmap) {
       var all = pix[$traceurRuntime.toProperty(i)] + pix[$traceurRuntime.toProperty(i + 1)] + pix[$traceurRuntime.toProperty(i + 2)];
       $traceurRuntime.setProperty(data, j++, all / 30);
     }
+    printMessage(canvas);
     return data;
   },
   buildPlane: function(width, squares) {

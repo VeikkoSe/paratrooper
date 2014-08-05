@@ -1,17 +1,27 @@
 class TerrainProcess extends Processor {
     draw() {
 
+
+
+
         var foundTerrainEntities = em.getAllEntitiesPosessingComponent("TerrainComponent");
         if (foundTerrainEntities.length > 0) {
 
             for (var e = 0; e < foundTerrainEntities.length; e++) {
 
-                  var foundTerrain = em.searchComponentForEntity(foundTerrainEntities[e], "TerrainComponent");
+                var foundTerrain = em.searchComponentForEntity(foundTerrainEntities[e], "TerrainComponent");
+
+                if (foundTerrain.terrain.texture.loaded==1 && foundTerrain.terrain.initDone==0) {
+                    foundTerrain.terrain.createData();
+                    foundTerrain.terrain.initDone = 1;
+                }
+                else {
+                    //console.log = function() {}
+
                     camera.mvPushMatrix();
 
                     gl.uniform3fv(shaderProgram.uDrawColor, [1, 1, 1]);
                     gl.uniform3fv(shaderProgram.uMaterialDiffuse, [1, 1, 1]);
-
 
 
                     mat4.translate(camera.mvMatrix, [0, 0, 0]);
@@ -31,18 +41,19 @@ class TerrainProcess extends Processor {
                     gl.bindBuffer(gl.ARRAY_BUFFER, foundTerrain.terrain.texturePositionBuffer);
                     gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, 2, gl.FLOAT, false, 0, 0);
                     gl.activeTexture(gl.TEXTURE0);
-                    gl.bindTexture(gl.TEXTURE_2D, foundTerrain.terrain.texture);
+                    gl.bindTexture(gl.TEXTURE_2D, foundTerrain.terrain.texture.loadedTexture);
                     gl.uniform1i(shaderProgram.samplerUniform, 0);
 
                     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, foundTerrain.terrain.indexPositionBuffer);
 
                     helpers.setMatrixUniforms();
 
-                    gl.drawElements(gl.TRIANGLES,foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+                    gl.drawElements(gl.TRIANGLES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
                     // gl.disable(gl.BLEND);
                     camera.mvPopMatrix();
 
                 }
+            }
             }
         }
 

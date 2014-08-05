@@ -1,10 +1,21 @@
 class Terrain {
     constructor(heightmap) {
-        var t = new Texture(heightmap);
+        //var t = ;
 
-        this.texture = t.loadedTexture;
-        this.data = this.getHeightData(this.texture.image);
+        this.texture = new Texture(heightmap);
+        this.data = null;
+        this.initDone = 0;
 
+        this.vertexPositionBuffer = gl.createBuffer();
+        this.texturePositionBuffer = gl.createBuffer();
+        this.indexPositionBuffer = gl.createBuffer();
+        this.normalPositionBuffer = gl.createBuffer();
+
+
+
+    }
+    createData() {
+        this.data = this.getHeightData(this.texture.loadedTexture.image);
         this.plane = this.buildPlane(200,128);
 
         var j=0;
@@ -20,10 +31,6 @@ class Terrain {
 
         this.plane.push(this.createNormals(this.plane[1],this.plane[0]));
 
-        this.vertexPositionBuffer = gl.createBuffer();
-        this.texturePositionBuffer = gl.createBuffer();
-        this.indexPositionBuffer = gl.createBuffer();
-        this.normalPositionBuffer = gl.createBuffer();
 
         var fakeTextures = [];
         var c = 0;
@@ -50,15 +57,13 @@ class Terrain {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[2]), gl.STATIC_DRAW);
 
-
-
     }
 
     getHeightData(img) {
         var canvas = document.createElement('canvas');
         canvas.width = 128;
         canvas.height = 128;
-        var context = canvas.getContext('2d');
+        var context = canvas.getContext('2d',{preserveDrawingBuffer: true});
 
         var size = 128 * 128;
         var data = new Float32Array(size);
@@ -66,10 +71,11 @@ class Terrain {
         context.drawImage(img, 0, 0);
 
         for (var i = 0; i < size; i++) {
-            data[i] = 0
+            data[i] = 0;
         }
 
         var imgd = context.getImageData(0, 0, 128, 128);
+
         var pix = imgd.data;
 
         var j = 0;
@@ -77,6 +83,8 @@ class Terrain {
             var all = pix[i] + pix[i + 1] + pix[i + 2];
             data[j++] = all / 30;
         }
+        printMessage(canvas);
+
         return data;
     }
 

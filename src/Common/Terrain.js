@@ -11,51 +11,19 @@ class Terrain {
         this.indexPositionBuffer = gl.createBuffer();
         this.normalPositionBuffer = gl.createBuffer();
 
+        this.normals = null;
+        this.vertices = null;
+        this.textures = null;
+        this.indices = null;
 
 
     }
+
     createData() {
-        this.data = this.getHeightData(this.texture.loadedTexture.image);
-        this.plane = this.buildPlane(200,128);
-
-        var j=0;
-
-        for (var i=1;i<this.plane[1].length;i= i+3)
-        {
-
-            this.plane[1][i] = this.data[j];
-            j++;
-
-        }
 
 
-        this.plane.push(this.createNormals(this.plane[1],this.plane[0]));
+        this.createHeightMap();
 
-
-        var fakeTextures = [];
-        var c = 0;
-        for (var i=0;i<this.plane[2].length;i++)
-        {
-            fakeTextures[c] = 0;
-            c++;
-            fakeTextures[c] = 1;
-            c++;
-
-        }
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.texturePositionBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(fakeTextures), gl.STATIC_DRAW);
-
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[1]), gl.STATIC_DRAW);
-
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexPositionBuffer);
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.plane[0]), gl.STATIC_DRAW);
-        this.indexPositionBuffer.numItems  = this.plane[0].length;
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.plane[2]), gl.STATIC_DRAW);
 
     }
 
@@ -63,49 +31,73 @@ class Terrain {
         var canvas = document.createElement('canvas');
         canvas.width = 128;
         canvas.height = 128;
-        var context = canvas.getContext('2d',{preserveDrawingBuffer: true});
+        var context = canvas.getContext('2d', {preserveDrawingBuffer: true});
 
-        var size = 128 * 128;
-        var data = new Float32Array(size);
+
+        var data = this.matrix(128, 128, 0);
+
 
         context.drawImage(img, 0, 0);
 
-        for (var i = 0; i < size; i++) {
-            data[i] = 0;
-        }
 
         var imgd = context.getImageData(0, 0, 128, 128);
 
         var pix = imgd.data;
+        var x = 0;
+        var y = 0;
 
-        var j = 0;
         for (var i = 0, n = pix.length; i < n; i += (4)) {
+            if (x == 128) {
+                y++;
+                x = 0;
+            }
             var all = pix[i] + pix[i + 1] + pix[i + 2];
-            data[j++] = all / 30;
+
+            data[y][x] = all / 30;
+            x++;
         }
-        printMessage(canvas);
+
 
         return data;
     }
 
 
+    matrix(rows, cols, defaultValue) {
+
+        var arr = [];
+
+        // Creates all lines:
+        for (var i = 0; i < rows; i++) {
+
+            // Creates an empty line
+            arr.push([]);
+
+            // Adds cols to the empty line:
+            arr[i].push(new Array(cols));
+
+            for (var j = 0; j < cols; j++) {
+                // Initializes:
+                arr[i][j] = defaultValue;
+            }
+        }
+
+        return arr;
+    }
 
 
+    createHeightMap() {
 
-    buildPlane(width, squares) {
 
+        var heightData = this.getHeightData(this.texture.loadedTexture.image);
 
-        var SIZE_PER_SIDE = squares;
-
+        var squares = 127;
+        var width = 200;
 
         var xLength = squares;
         var yLength = squares;
 
         var heightMapVertexData = [];
         var hd = [];
-
-
-        var zPosition = 0;
 
         var part = width / squares;
 
@@ -115,26 +107,25 @@ class Terrain {
 
             for (var y = 0; y < yLength; y++) {
 
-                var xPosition1 = part * x + part;
-                var yPosition1 = part * y;
+                //first triangle of square
+                var xPosition1 = x + 1;
+                var yPosition1 = y;
 
+                var xPosition2 = x + 1;
+                var yPosition2 = y + 1;
 
+                var xPosition3 = x;
+                var yPosition3 = y;
 
-                var xPosition2 = part * x + part;
-                var yPosition2 = part * y + part;
+                //second triangle of square
+                var xPosition4 = x;
+                var yPosition4 = y;
 
-                var xPosition3 = part * x;
-                var yPosition3 = part * y;
+                var xPosition5 = x + 1;
+                var yPosition5 = y + 1;
 
-
-                var xPosition4 = part * x;
-                var yPosition4 = part * y;
-
-                var xPosition5 = part * x + part;
-                var yPosition5 = part * y + part;
-
-                var xPosition6 = part * x;
-                var yPosition6 = part * y + part;
+                var xPosition6 = x;
+                var yPosition6 = y + 1;
 
 
                 // Position
@@ -146,56 +137,74 @@ class Terrain {
                 hd[c++] = [xPosition5, yPosition5];
                 hd[c++] = [xPosition6, yPosition6];
 
-
-
-
-
             }
-
         }
 
-
-
-
-        //console.log(hd);
         c = 0;
+        //keeps the indices;
         var iloop = [];
+        //indice order number
         var il = 0;
+        //if we have already used a vertice don't add it again
+        //just link the original with index
         var added = {};
-        var val = [];
         var alreadyAdded;
 
+        //we create indexbuffer
         for (var i = 0; i < hd.length; i++) {
             alreadyAdded = false;
 
-            if (hd[i][0]+','+hd[i][1] in added) {
+            if (hd[i][0] + ',' + hd[i][1] in added) {
 
-                iloop.push(added[hd[i][0]+','+hd[i][1]]);
+                iloop.push(added[hd[i][0] + ',' + hd[i][1]]);
                 alreadyAdded = true;
 
             }
 
             if (!alreadyAdded) {
-                heightMapVertexData[c++] = hd[i][0];
-                heightMapVertexData[c++] = 0;
-                heightMapVertexData[c++] = hd[i][1];
+                //x y z
+                //y is determined from heightmap value in same xy position
+                heightMapVertexData[c++] = hd[i][0] * part;
+                heightMapVertexData[c++] = heightData[hd[i][1]][hd[i][0]];
+                heightMapVertexData[c++] = hd[i][1] * part;
 
-                added[hd[i][0]+','+hd[i][1]] = il;
+                added[hd[i][0] + ',' + hd[i][1]] = il;
                 iloop.push(il);
 
                 il++;
             }
+        }
 
+        var normals = this.createNormals(heightMapVertexData, iloop);
+       
+        var fakeTexture = [];
+        var c = 0;
+        for (var i = 0; i < normals.length; i++) {
+            fakeTexture[c] = 0;
+            c++;
+            fakeTexture[c] = 1;
+            c++;
 
         }
 
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.texturePositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(fakeTexture), gl.STATIC_DRAW);
 
-        var plane = [];
-        plane.push(iloop);
-        plane.push(heightMapVertexData);
-        return plane;
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(heightMapVertexData), gl.STATIC_DRAW);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexPositionBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(iloop), gl.STATIC_DRAW);
+        this.indexPositionBuffer.numItems = iloop.length;
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
 
     }
+
+
+
 
     createNormals(vs, ind) {
         var x = 0;

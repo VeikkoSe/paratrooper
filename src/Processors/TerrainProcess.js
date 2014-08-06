@@ -1,9 +1,6 @@
 class TerrainProcess extends Processor {
     draw() {
 
-
-
-
         var foundTerrainEntities = em.getAllEntitiesPosessingComponent("TerrainComponent");
         if (foundTerrainEntities.length > 0) {
 
@@ -47,6 +44,8 @@ class TerrainProcess extends Processor {
                     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, foundTerrain.terrain.indexPositionBuffer);
 
                     helpers.setMatrixUniforms();
+
+                    //gl.drawElements(gl.LINES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT,0);
 
                     gl.drawElements(gl.TRIANGLES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
                     // gl.disable(gl.BLEND);

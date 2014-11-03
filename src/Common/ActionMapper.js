@@ -32,8 +32,8 @@ class ActionMapper {
         if (y > resolutionHeight)
             y = resolutionHeight;
 
-        console.log(x);
-        console.log(y);
+        //console.log(x);
+        //console.log(y);
 
         if (picker.findAndSet([x, y]))
             return true;
@@ -69,7 +69,9 @@ class ActionMapper {
             viewportArray, modelPointArrayResultsFar);
 
         camera.clickPosition = intersectionpoint(modelPointArrayResultsNear, modelPointArrayResultsFar);
-
+        console.debug(camera.clickPosition[0]);
+        console.debug(camera.clickPosition[1]);
+        console.debug(camera.clickPosition[2]);
     }
 
 

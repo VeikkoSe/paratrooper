@@ -33,9 +33,15 @@ var Mesh = function Mesh(name) {
     "use strict";
     var d = JSON.parse(data);
     this.vertices = d.vertices;
+    console.log(this.vertices.length);
     this.texturecoordinates = d.texturecoordinates;
     this.indices = d.indices;
-    this.normals = this.createNormals(this.vertices, this.indices);
+    console.log(this.indices.length);
+    if (d.normals.length < 1) {
+      this.normals = this.createNormals(this.vertices, this.indices);
+    } else {
+      this.normals = d.normals;
+    }
     this.ambient = d.ambient;
     this.diffuse = d.diffuse;
     this.specular = d.specular;

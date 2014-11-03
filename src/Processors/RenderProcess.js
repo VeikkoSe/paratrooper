@@ -43,6 +43,7 @@ class RenderProcess extends Processor {
                     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, fm.mesh.indexPositionBuffer);
 
                     helpers.setMatrixUniforms();
+                    //gl.drawElements(gl.LINES, fm.mesh.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT,0);
                     gl.drawElements(gl.TRIANGLES, fm.mesh.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
                     // gl.disable(gl.BLEND);
                     camera.mvPopMatrix();

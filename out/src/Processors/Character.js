@@ -25,22 +25,33 @@ var $Character = Character;
               me.newXpos = camera.clickPosition[0];
               me.newYpos = camera.clickPosition[1];
               me.newZpos = camera.clickPosition[2];
+              if (me.newXpos > 0 && me.newZpos > 0) {
+                var start = {
+                  x: re.xPos,
+                  y: re.zPos
+                };
+                var end = {
+                  x: me.newXpos,
+                  y: me.newZpos
+                };
+                me.path = astarManager.move(start, end);
+                me.pathPosition = 0;
+              }
             }
-            if (!this.isClose(re.xPos, me.newXpos) || !this.isClose(re.zPos, me.newZpos)) {
-              var dirX = me.newXpos - re.xPos;
-              var dirZ = me.newZpos - re.zPos;
-              var hyp = Math.sqrt(dirX * dirX + dirZ * dirZ);
-              console.log(hyp);
-              console.log = function() {};
-              dirX /= hyp;
-              dirZ /= hyp;
-              re.xPos += dirX * speed;
-              re.zPos += dirZ * speed;
+            if (me && me.path && me.pathPosition != me.path.length) {
+              var pos = me.pathPosition++;
+              me.newXpos = me.path[$traceurRuntime.toProperty(pos)].x;
+              me.newZpos = me.path[$traceurRuntime.toProperty(pos)].y;
+              re.xPos = me.newXpos;
+              re.zPos = me.newZpos;
               re.yPos = 1;
             }
           }
         }
       }
     }
+  },
+  checkCollision: function() {
+    "use strict";
   }
 }, {}, Processor);

@@ -119,6 +119,7 @@ function webGLStart() {
   picker = new Picker(canvas);
   actionMapper = new ActionMapper();
   game = new Game(canvas);
+  astarManager = new AstarManager();
   document.onmousemove = actionMapper.handleMouseMove;
   document.onmousedown = actionMapper.handleMouseDown;
 }
@@ -144,7 +145,7 @@ function updateRotation() {
 }
 $(document).ready(function() {
   $('#slider-x').slider({
-    value: 0.0,
+    value: -20.0,
     min: -500,
     max: 500,
     step: 0.1,
@@ -152,7 +153,7 @@ $(document).ready(function() {
     change: updateLightPosition
   });
   $('#slider-y').slider({
-    value: -400.0,
+    value: 35.0,
     min: -500,
     max: 500,
     step: 0.1,
@@ -160,7 +161,7 @@ $(document).ready(function() {
     change: updateLightPosition
   });
   $('#slider-z').slider({
-    value: -130,
+    value: -28,
     min: -500,
     max: 500,
     step: 0.1,
@@ -168,7 +169,7 @@ $(document).ready(function() {
     change: updateLightPosition
   });
   $('#cslider-x').slider({
-    value: -88,
+    value: -16,
     min: -600,
     max: 600,
     step: 0.1,
@@ -176,7 +177,7 @@ $(document).ready(function() {
     change: updateCameraPosition
   });
   $('#cslider-y').slider({
-    value: -104,
+    value: -53,
     min: -600,
     max: 600,
     step: 0.1,
@@ -184,7 +185,7 @@ $(document).ready(function() {
     change: updateCameraPosition
   });
   $('#cslider-z').slider({
-    value: -360,
+    value: -82,
     min: -600,
     max: 600,
     step: 0.1,
@@ -192,7 +193,7 @@ $(document).ready(function() {
     change: updateCameraPosition
   });
   $('#rslider-x').slider({
-    value: 0,
+    value: 60,
     min: 0,
     max: 360,
     step: 0.1,

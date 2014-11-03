@@ -10,7 +10,7 @@ var EntityFactory = function EntityFactory() {
     e.addComponent(new Renderable(0, 1, 0));
     e.addComponent(new Selectable());
     e.addComponent(this.controllable);
-    e.addComponent(new MeshComponent(new Mesh("ranger")));
+    e.addComponent(new MeshComponent(new Mesh("ranger", 5)));
   },
   createRanger: function() {
     "use strict";
@@ -19,7 +19,7 @@ var EntityFactory = function EntityFactory() {
     e.addComponent(new Renderable(5, 1, 5));
     e.addComponent(new Selectable());
     e.addComponent(this.controllable);
-    e.addComponent(new MeshComponent(new Mesh("gunner")));
+    e.addComponent(new MeshComponent(new Mesh("gunner", 5)));
   },
   createGunner: function() {
     "use strict";
@@ -28,33 +28,22 @@ var EntityFactory = function EntityFactory() {
     e.addComponent(new Renderable(10, 1, 5));
     e.addComponent(new Selectable());
     e.addComponent(this.controllable);
-    e.addComponent(new MeshComponent(new Mesh("medic")));
-  },
-  createBackground: function() {
-    "use strict";
-    var e = em.addNew();
-    e.addComponent(new Renderable(0, 0, 0));
-    e.addComponent(new MeshComponent(new Mesh("background")));
+    e.addComponent(new MeshComponent(new Mesh("medic", 5)));
   },
   createTerrain: function() {
     "use strict";
     var e = em.addNew();
     e.addComponent(new Renderable(0, 0, 0));
-    e.addComponent(new TerrainComponent(new Terrain("heightmap")));
+    e.addComponent(new MeshComponent(new Mesh("heightmap_1", 5)));
   },
   createHouse: function() {
     "use strict";
     var mesh = new Mesh("house");
-    for (var i = 0; i < 3; i++) {
-      var randX = Math.floor((Math.random() * 50) + 1);
-      var randZ = Math.floor((Math.random() * 50) + 1);
-      randX *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-      randZ *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+    for (var i = 0; i < 1; i++) {
       var e = em.addNew();
-      e.addComponent(new Renderable(randX, 0, randZ));
-      e.addComponent(new Selectable());
+      e.addComponent(new Renderable(30, 0, 30));
       e.addComponent(this.controllable);
-      e.addComponent(new MeshComponent(mesh));
+      e.addComponent(new MeshComponent(mesh, 5));
     }
   }
 }, {});

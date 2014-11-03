@@ -30,7 +30,7 @@ var $TerrainProcess = TerrainProcess;
           gl.uniform1i(shaderProgram.samplerUniform, 0);
           gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, foundTerrain.terrain.indexPositionBuffer);
           helpers.setMatrixUniforms();
-          gl.drawElements(gl.TRIANGLES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+          gl.drawElements(gl.LINES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
           camera.mvPopMatrix();
         }
       }

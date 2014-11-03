@@ -16,8 +16,11 @@ var GameState = function GameState(canvas) {
     gl.depthFunc(gl.LESS);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    this.ef.createMedic();
     this.ef.createTerrain();
+    this.ef.createMedic();
+    this.ef.createRanger();
+    this.ef.createGunner();
+    this.ef.createHouse();
   },
   animate: function() {
     "use strict";

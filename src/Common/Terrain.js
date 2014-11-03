@@ -15,6 +15,9 @@ class Terrain {
         this.vertices = null;
         this.textures = null;
         this.indices = null;
+        this.terrainData = null;
+
+
 
 
     }
@@ -22,25 +25,26 @@ class Terrain {
     createData() {
 
 
-        this.createHeightMap();
+        this.terrainData = this.createHeightMap();
 
 
     }
 
     getHeightData(img) {
+        var size = 128;
         var canvas = document.createElement('canvas');
-        canvas.width = 128;
-        canvas.height = 128;
+        canvas.width = size;
+        canvas.height = size;
         var context = canvas.getContext('2d', {preserveDrawingBuffer: true});
 
 
-        var data = this.matrix(128, 128, 0);
+        var data = this.matrix(size, size, 0);
 
 
         context.drawImage(img, 0, 0);
 
 
-        var imgd = context.getImageData(0, 0, 128, 128);
+        var imgd = context.getImageData(0, 0, size, size);
 
         var pix = imgd.data;
         var x = 0;
@@ -90,8 +94,8 @@ class Terrain {
 
         var heightData = this.getHeightData(this.texture.loadedTexture.image);
 
-        var squares = 127;
-        var width = 200;
+        var squares = 256;
+        var width = 256;
 
         var xLength = squares;
         var yLength = squares;
@@ -165,6 +169,7 @@ class Terrain {
                 //x y z
                 //y is determined from heightmap value in same xy position
                 heightMapVertexData[c++] = hd[i][0] * part;
+                //heightMapVertexData[c++] = 0;
                 heightMapVertexData[c++] = heightData[hd[i][1]][hd[i][0]];
                 heightMapVertexData[c++] = hd[i][1] * part;
 
@@ -176,7 +181,12 @@ class Terrain {
         }
 
         var normals = this.createNormals(heightMapVertexData, iloop);
-       
+
+
+        console.log(heightMapVertexData);
+        console.log(iloop);
+
+
         var fakeTexture = [];
         var c = 0;
         for (var i = 0; i < normals.length; i++) {
@@ -186,6 +196,9 @@ class Terrain {
             c++;
 
         }
+        console.log(fakeTexture);
+        console.log(normals);
+        return;
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.texturePositionBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(fakeTexture), gl.STATIC_DRAW);
@@ -201,6 +214,7 @@ class Terrain {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
 
+        return hd;
     }
 
 

@@ -27,8 +27,6 @@ var ActionMapper = function ActionMapper() {
       y = 0;
     if (y > resolutionHeight)
       y = resolutionHeight;
-    console.log(x);
-    console.log(y);
     if (picker.findAndSet([x, y]))
       return true;
     return false;
@@ -43,6 +41,9 @@ var ActionMapper = function ActionMapper() {
     var modelPointArrayResultsFar = [];
     var success = GLU.unProject(x, y, 1, camera.mvMatrix, camera.pMatrix, viewportArray, modelPointArrayResultsFar);
     camera.clickPosition = intersectionpoint(modelPointArrayResultsNear, modelPointArrayResultsFar);
+    console.debug(camera.clickPosition[0]);
+    console.debug(camera.clickPosition[1]);
+    console.debug(camera.clickPosition[2]);
   },
   handleMouseMove: function(e) {
     "use strict";

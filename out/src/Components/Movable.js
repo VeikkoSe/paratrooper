@@ -7,6 +7,7 @@ var Movable = function Movable() {
   this.newXpos = newXpos;
   this.newYpos = newYpos;
   this.newZpos = newZpos;
+  this.path = {};
   this.angle = 90;
   this.lt = 0;
   this.speed = 0;

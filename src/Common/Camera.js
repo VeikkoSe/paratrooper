@@ -79,7 +79,7 @@ class Camera {
             this.x = $('#cslider-x').slider("value");
             this.y = $('#cslider-y').slider("value");
             this.z = $('#cslider-z').slider("value");
-            this.rotation = $('#rslider-x').slider("value");
+            this.rotation = helpers.degToRad($('#rslider-x').slider("value"));
         }
 
         mat4.identity(this.mvMatrix);

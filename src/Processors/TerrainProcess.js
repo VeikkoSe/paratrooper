@@ -45,9 +45,9 @@ class TerrainProcess extends Processor {
 
                     helpers.setMatrixUniforms();
 
-                    //gl.drawElements(gl.LINES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT,0);
+                    gl.drawElements(gl.LINES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT,0);
 
-                    gl.drawElements(gl.TRIANGLES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+                    //gl.drawElements(gl.TRIANGLES, foundTerrain.terrain.indexPositionBuffer.numItems, gl.UNSIGNED_SHORT, 0);
                     // gl.disable(gl.BLEND);
                     camera.mvPopMatrix();
 

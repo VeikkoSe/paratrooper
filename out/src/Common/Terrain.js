@@ -11,21 +11,23 @@ var Terrain = function Terrain(heightmap) {
   this.vertices = null;
   this.textures = null;
   this.indices = null;
+  this.terrainData = null;
 };
 ($traceurRuntime.createClass)(Terrain, {
   createData: function() {
     "use strict";
-    this.createHeightMap();
+    this.terrainData = this.createHeightMap();
   },
   getHeightData: function(img) {
     "use strict";
+    var size = 128;
     var canvas = document.createElement('canvas');
-    canvas.width = 128;
-    canvas.height = 128;
+    canvas.width = size;
+    canvas.height = size;
     var context = canvas.getContext('2d', {preserveDrawingBuffer: true});
-    var data = this.matrix(128, 128, 0);
+    var data = this.matrix(size, size, 0);
     context.drawImage(img, 0, 0);
-    var imgd = context.getImageData(0, 0, 128, 128);
+    var imgd = context.getImageData(0, 0, size, size);
     var pix = imgd.data;
     var x = 0;
     var y = 0;
@@ -56,8 +58,8 @@ var Terrain = function Terrain(heightmap) {
   createHeightMap: function() {
     "use strict";
     var heightData = this.getHeightData(this.texture.loadedTexture.image);
-    var squares = 127;
-    var width = 200;
+    var squares = 256;
+    var width = 256;
     var xLength = squares;
     var yLength = squares;
     var heightMapVertexData = [];
@@ -107,6 +109,8 @@ var Terrain = function Terrain(heightmap) {
       }
     }
     var normals = this.createNormals(heightMapVertexData, iloop);
+    console.log(heightMapVertexData);
+    console.log(iloop);
     var fakeTexture = [];
     var c = 0;
     for (var i = 0; i < normals.length; i++) {
@@ -115,6 +119,9 @@ var Terrain = function Terrain(heightmap) {
       $traceurRuntime.setProperty(fakeTexture, c, 1);
       c++;
     }
+    console.log(fakeTexture);
+    console.log(normals);
+    return;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.texturePositionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(fakeTexture), gl.STATIC_DRAW);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
@@ -124,6 +131,7 @@ var Terrain = function Terrain(heightmap) {
     this.indexPositionBuffer.numItems = iloop.length;
     gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
+    return hd;
   },
   createNormals: function(vs, ind) {
     "use strict";

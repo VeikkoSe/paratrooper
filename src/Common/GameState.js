@@ -25,15 +25,16 @@ class GameState extends StateEngine {
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-
+        this.ef.createTerrain();
         this.ef.createMedic();
-        /*
+
         this.ef.createRanger();
         this.ef.createGunner();
-        this.ef.createBackground();
+       //this.ef.createBackground();
+
         this.ef.createHouse();
-        */
-        this.ef.createTerrain();
+
+
 
     }
 
